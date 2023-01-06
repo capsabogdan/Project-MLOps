@@ -61,10 +61,10 @@ Project Organization
 
 This repository contains the project work carried out in the MLOps course taught at DTU, in a group of 5 consisting of: Alexandra Polymenopoulou, Bogdan Capsa Jakob Fahl, Melina Siskou, Thomas Spyrou.
 
-Goal:
+Goal: The purpose of this project is to build a movie Recommendation System.
 
-Framework:
+Framework: We'll be using Pytorch Geometric as a data specific framework, fastai/ONNX Runtime for training and Hydra for utility.
 
-Data:
+Data: The Data is obtained using ArangoDB, and loaded in panda df,  contains 45463 records and 24 features.
 
-Deep learning models used:
+Deep learning models used: We'll be using Graph Neural Network with
