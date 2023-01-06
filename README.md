@@ -69,16 +69,24 @@ Jakob Fahl | s184419
 Melina Siskou | s213158
 Thomas Spyrou | s213161
 
-Goal: The purpose of this project is to build a movie Recommendation System.
+#### Goal
 
-Framework: We'll be using Pytorch Geometric as a data specific framework, fastai/ONNX Runtime for training and Hydra for utility.
+The purpose of this project is to build a movie Recommendation System. In this project we will maninly focus on the pipeline of the system rather than the model itself.
 
-Data: The Data is obtained using ArangoDB,  containing 45463 records and 24 features. We are going to use the sampled version of The Movies Dataset. The dataset contains 2 csv files:
+#### Framework
+
+We will be using Pytorch Geometric a library built upon PyTorch to easily write and train Graph Neural Networks (GNNs) for a wide range of applications related to structured data. Inference is performed using ONNX Runtime and fastai. Utilities are provided by Hydra. 
+
+#### Data 
+
+The Data is obtained using ArangoDB, containing 45463 records and 24 features. We are going to use the sampled version of The Movies Dataset. The dataset contains 3 csv files:
 
 * **movies_metadata.csv**: Contains information on 45,000 movies featured in the Full MovieLens dataset. Features include posters, backdrops, budget, revenue, release dates, languages, production countries and companies.
 * **links_small.csv**: Contains the TMDB and IMDB IDs of a small subset of 9,000 movies of the Full Dataset.
 * **ratings_small.csv**: subset of 100,000 ratings from 700 users on 9,000 movies.
 
-Deep learning models used: We'll be using Graph Neural Network with
+#### Model
+
+This Graph Neural Network model is designed to predict the movies that a user has not watched yet, based on the links between the user and other movies.
 
 Credits: https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset
