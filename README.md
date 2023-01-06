@@ -55,3 +55,16 @@ Project Organization
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+
+## Project Description
+
+This repository contains the project work carried out in the MLOps course taught at DTU, in a group og 5 consisting of: Alexandra Polymenopoulou, Bogdan Capsa Jakob Fahl, Melina Siskou, Thomas Spyrou, (see contributors list for individual github pages).
+
+Goal:
+
+Framework:
+
+Data:
+
+Deep learning models used:
