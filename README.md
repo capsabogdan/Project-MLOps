@@ -87,6 +87,6 @@ The Data is obtained using ArangoDB, containing 45463 records and 24 features. W
 
 #### Model
 
-This Graph Neural Network model is designed to predict the movies that a user has not watched yet, based on the links between the user and other movies.
+This Graph Neural Network model (with CNNs) is designed to predict the movies that a user has not watched yet, based on the links between the user and other movies.
 
 Credits: https://medium.com/arangodb/integrate-arangodb-with-pytorch-geometric-to-build-recommendation-systems-dd69db688465
