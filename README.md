@@ -81,4 +81,4 @@ Thomas Spyrou | s213161
 
 **Deep learning models used**: We'll be using Graph Neural Network with CNNs
 
-Credits: [[https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset](https://medium.com/arangodb/integrate-arangodb-with-pytorch-geometric-to-build-recommendation-systems-dd69db688465)](https://medium.com/arangodb/integrate-arangodb-with-pytorch-geometric-to-build-recommendation-systems-dd69db688465)
+Credits: https://medium.com/arangodb/integrate-arangodb-with-pytorch-geometric-to-build-recommendation-systems-dd69db688465
