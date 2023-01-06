@@ -59,7 +59,7 @@ Project Organization
 
 ## Project Description
 
-This repository contains the project work carried out in the MLOps course taught at DTU, in a group og 5 consisting of: Alexandra Polymenopoulou, Bogdan Capsa Jakob Fahl, Melina Siskou, Thomas Spyrou, (see contributors list for individual github pages).
+This repository contains the project work carried out in the MLOps course taught at DTU, in a group of 5 consisting of: Alexandra Polymenopoulou, Bogdan Capsa Jakob Fahl, Melina Siskou, Thomas Spyrou.
 
 Goal:
 
