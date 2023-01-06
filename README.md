@@ -59,7 +59,15 @@ Project Organization
 
 ## Project Description
 
-This repository contains the project work carried out in the MLOps course taught at DTU, in a group of 5 consisting of: Alexandra Polymenopoulou, Bogdan Capsa Jakob Fahl, Melina Siskou, Thomas Spyrou.
+This repository contains the project work carried out in the MLOps course taught at DTU, in a group of 5 consisting of: 
+
+Name  | Student number
+------------- | -------------
+Alexandra Polymenopoulou  | s212558
+Bogdan Capsa  |   s210172
+Jakob Fahl | s184419
+Melina Siskou | s213158
+Thomas Spyrou | s213161
 
 Goal: The purpose of this project is to build a movie Recommendation System.
 
