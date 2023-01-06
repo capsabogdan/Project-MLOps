@@ -73,6 +73,12 @@ Goal: The purpose of this project is to build a movie Recommendation System.
 
 Framework: We'll be using Pytorch Geometric as a data specific framework, fastai/ONNX Runtime for training and Hydra for utility.
 
-Data: The Data is obtained using ArangoDB, and loaded in panda df,  contains 45463 records and 24 features.
+Data: The Data is obtained using ArangoDB, and loaded in panda df,  contains 45463 records and 24 features. We are going to use the sampled version of The Movies Dataset . This dataset contains 2 csv files:
+
+* movies_metadata.csv: Contains information on 45,000 movies featured in the Full MovieLens dataset. Features include posters, backdrops, budget, revenue, release dates, languages, production countries and companies.
+* links_small.csv: Contains the TMDB and IMDB IDs of a small subset of 9,000 movies of the Full Dataset.
+* ratings_small.csv: subset of 100,000 ratings from 700 users on 9,000 movies.
 
 Deep learning models used: We'll be using Graph Neural Network with
+
+Credits: https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset
