@@ -1,9 +1,11 @@
+
 # -*- coding: utf-8 -*-
 import click
 import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
-
+from git import Repo
+import git
 
 @click.command()
 @click.argument('input_filepath', type=click.Path(exists=True))
@@ -20,8 +22,13 @@ if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
+    git clone -b movie-data-source --single-branch https://github.com/arangodb/interactive_tutorials.git movie_data_source
     # not used in this stub but often useful for finding various files
     project_dir = Path(__file__).resolve().parents[2]
+
+    git_url = "https://github.com/arangodb/interactive_tutorials.git"
+    # clone git repo
+    repo = Repo.clone_from(git_url, ".")
 
     # find .env automagically by walking up directories until it's found, then
     # load up the .env entries as environment variables
