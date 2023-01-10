@@ -71,7 +71,7 @@ Thomas Spyrou | s213161
 
 #### Goal
 
-The purpose of this project is to build a movie Recommendation System. In this project we will maninly focus on the pipeline of the system rather than the model itself.
+The purpose of this project is to build a movie Recommendation System. In this project we will mainly focus on the pipeline of the system rather than the model itself.
 
 #### Framework
 
