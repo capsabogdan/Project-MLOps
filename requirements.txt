@@ -2,3 +2,13 @@ click==8.0.4
 GitPython==3.1.30
 python-dotenv==0.21.0
 setuptools==65.6.3
+torch==1.13.1
+torchtext==0.14.1
+torchvision 
+scikit-learn==1.2.0
+scipy==1.10.0
+numpy
+nvidia-cublas-cu11==11.10.3.66
+nvidia-cuda-nvrtc-cu11==11.7.99
+nvidia-cuda-runtime-cu11==11.7.99
+nvidia-cudnn-cu11==8.5.0.96
