@@ -11,8 +11,9 @@ class GCN(nn.Module):
         self.dropout = nn.Dropout(0.5)
         self.relu = F.relu()
 
-    def forward(self, x: torch.Tensor, edge_index: torch.Tensor):
-
+    def forward(self, data):
+        x, edge_index = data.x, data.edge_index
+        
         x = self.conv1(x, edge_index)
         x = self.relu(x)
         x = self.dropout(x)
