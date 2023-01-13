@@ -1,5 +1,5 @@
 steps:
    - name: 'gcr.io/cloud-builders/docker'
-     args: ['build', '-t', 'gcr.io/zeroshots/movie_trainer_cloud, '.']
+     args: ['build', '-t', 'gcr.io/zeroshots/movie_trainer_cloud', '.']
    - name: 'gcr.io/cloud-builders/docker'
      args: ['push', 'gcr.io/zeroshots/movie_trainer_cloud']
