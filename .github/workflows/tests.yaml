@@ -6,6 +6,11 @@ on:
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
 
     runs-on: ubuntu-latest
     steps:
