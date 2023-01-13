@@ -325,8 +325,6 @@ if __name__ == '__main__':
             to_vertex_collections=['Movie']
         )
 
-    print("YUPI!!!!!!!!!!!!!!!!!!")
-
     user_id, movie_id, ratings = ratings_df[['userId']].values.flatten(), ratings_df[['movieId']].values.flatten() , ratings_df[['rating']].values.flatten()
 
     create_ratings_graph(user_id, movie_id, ratings)
