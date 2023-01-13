@@ -23,7 +23,7 @@ def remove_movies(m_id):
     no_metadata = []
     for idx in range(len(m_id)):
         tmdb_id = id_map.loc[id_map['movieId'] == m_id[idx]]
-  
+
         if tmdb_id.size == 0:
             no_metadata.append(m_id[idx])
             #print('No Meta data information at:', m_id[idx])
@@ -53,7 +53,7 @@ def populate_user_collection(total_users):
 
         insert_doc["_id"] = "Users/" + str(user_mapping[user_ids[idx]])
         insert_doc["original_id"] = str(user_ids[idx])
-        
+
         batch.append(insert_doc)
         index +=1
         last_record = (idx == (total_users - 1))
@@ -61,7 +61,7 @@ def populate_user_collection(total_users):
             print("Inserting batch %d" % (batch_idx))
             batch_idx += 1
             user_collection.import_bulk(batch)
-            batch = []   
+            batch = []
         if last_record and len(batch) > 0:
             print("Inserting batch the last batch!")
             user_collection.import_bulk(batch)
@@ -74,14 +74,14 @@ def create_ratings_graph(user_id, movie_id, ratings):
     index = 0
     edge_collection = movie_rec_db["Ratings"]
     for idx in tqdm(range(ratings.shape[0])):
-        
+
         # removing edges (movies) with ltdata
         if movie_id[idx] in no_metadata:
             print('Removing edges with no metadata', movie_id[idx])
-            
+
         else:
             insert_doc = {}
-            insert_doc = {"_id":    "Ratings" + "/" + 'user-' + str(user_mapping[user_id[idx]]) + "-r-" + "movie-" + str(movie_mappings[movie_id[idx]]), 
+            insert_doc = {"_id":    "Ratings" + "/" + 'user-' + str(user_mapping[user_id[idx]]) + "-r-" + "movie-" + str(movie_mappings[movie_id[idx]]),
                           "_from":  ("Users" + "/" + str(user_mapping[user_id[idx]])),
                           "_to":    ("Movie" + "/" + str(movie_mappings[movie_id[idx]])),
                           "_rating": float(ratings[idx])}
@@ -105,22 +105,22 @@ def create_pyg_edges(rating_docs):
     for doc in rating_docs:
         _from = int(doc['_from'].split('/')[1])
         _to   = int(doc['_to'].split('/')[1])
-         
+
         src.append(_from)
         dst.append(_to)
         ratings.append(int(doc['_rating']))
-        
+
     edge_index = torch.tensor([src, dst])
     edge_attr = torch.tensor(ratings)
 
-    return edge_index, edge_attr 
+    return edge_index, edge_attr
 
 def SequenceEncoder(movie_docs , model_name=None):
     movie_titles = [doc['movie_title'] for doc in movie_docs]
     model = SentenceTransformer(model_name, device=device)
     title_embeddings = model.encode(movie_titles, show_progress_bar=True,
                               convert_to_tensor=True, device=device)
-    
+
     return title_embeddings
 
 def GenresEncoder(movie_docs):
@@ -130,11 +130,11 @@ def GenresEncoder(movie_docs):
         gen.append(doc['genres'])
         #genre = doc['movie_genres']
         #gen.append(genre.split(sep))
-    
+
     # getting unique genres
     unique_gen = set(list(itertools.chain(*gen)))
     print("Number of unqiue genres we have:", unique_gen)
-    
+
     mapping = {g: i for i, g in enumerate(unique_gen)}
     x = torch.zeros(len(gen), len(mapping))
     for i, m_gen in enumerate(gen):
@@ -166,7 +166,7 @@ if __name__ == '__main__':
 
 
     ## Loading the data present in csv files to ArangoDB
-    raw_data_dir = './data/raw/sampled_movie_dataset'
+    raw_data_dir = './data/raw'
     processed_data_dir = './data/processed'
     # Load metadata
     df = pd.read_csv (raw_data_dir + '/movies_metadata.csv')
@@ -211,7 +211,7 @@ if __name__ == '__main__':
     # get temporary credentials for ArangoDB on cloud
     login = oasis.getTempCredentials(tutorialName="MovieRecommendations", credentialProvider="https://tutorials.arangodb.cloud:8529/_db/_system/tutorialDB/tutorialDB")
     # Connect to the temp database
-    # Please note that we use the python-arango driver as it has better support for ArangoSearch 
+    # Please note that we use the python-arango driver as it has better support for ArangoSearch
     movie_rec_db = oasis.connect_python_arango(login)
 
     # url to access the ArangoDB Web UI
@@ -234,7 +234,7 @@ if __name__ == '__main__':
     for idx in tqdm(range(len(m_id))):
         insert_doc = {}
         tmdb_id = id_map.loc[id_map['movieId'] == m_id[idx]]
-    
+
         if tmdb_id.size == 0:
             print('No Meta data information at:', m_id[idx])
         else:
@@ -242,7 +242,7 @@ if __name__ == '__main__':
             emb_id = "Movie/" + str(movie_mappings[m_id[idx]])
             insert_doc["_id"] = emb_id
             m_meta = sampled_md.loc[sampled_md['id'] == tmdb_id]
-            # adding movie metadata information 
+            # adding movie metadata information
             m_title = m_meta.iloc[0]['title']
             m_poster = m_meta.iloc[0]['poster_path']
             m_description = m_meta.iloc[0]['description']
@@ -250,21 +250,21 @@ if __name__ == '__main__':
             m_genre = m_meta.iloc[0]['genres']
             m_genre = yaml.load(m_genre, Loader=yaml.BaseLoader)
             genres = [g['name'] for g in m_genre]
-            
+
             insert_doc["movieId"] = m_id[idx]
             insert_doc["mapped_movieId"] = movie_mappings[m_id[idx]]
             insert_doc["tmdbId"] = tmdb_id
             insert_doc['movie_title'] = m_title
-        
+
             insert_doc['description'] = m_description
             insert_doc['genres'] = genres
             insert_doc['language'] = m_language
-            
+
             if str(m_poster) == "nan":
                 insert_doc['poster_path'] = "No poster path available"
             else:
                 insert_doc['poster_path'] = m_poster
-            
+
             batch.append(insert_doc)
             index +=1
             last_record = (idx == (len(m_id) - 1))
@@ -272,12 +272,12 @@ if __name__ == '__main__':
                 #print("Inserting batch %d" % (batch_idx))
                 batch_idx += 1
                 movie_collection.import_bulk(batch)
-                batch = []   
+                batch = []
             if last_record and len(batch) > 0:
                 print("Inserting batch the last batch!")
                 movie_collection.import_bulk(batch)
 
-        
+
     # Users has no side information
     total_users = np.unique(ratings_df[['userId']].values.flatten()).shape[0]
     print("Total number of Users:", total_users)
@@ -312,6 +312,10 @@ if __name__ == '__main__':
     if not movie_rating_graph.has_vertex_collection("Movie"):
         movie_rating_graph.vertex_collection("Movie")
 
+    #movie_rec_db._drop(["Users", "Movie", "Ratings"])
+
+    print("-------------------------------------")
+
     # creating edge definitions named "Ratings. This creates any missing
     # collections and returns an API wrapper for "Ratings" edge collection.
     if not movie_rating_graph.has_edge_definition("Ratings"):
@@ -320,7 +324,9 @@ if __name__ == '__main__':
             from_vertex_collections=['Users'],
             to_vertex_collections=['Movie']
         )
-    
+
+    print("YUPI!!!!!!!!!!!!!!!!!!")
+
     user_id, movie_id, ratings = ratings_df[['userId']].values.flatten(), ratings_df[['movieId']].values.flatten() , ratings_df[['rating']].values.flatten()
 
     create_ratings_graph(user_id, movie_id, ratings)
@@ -330,6 +336,12 @@ if __name__ == '__main__':
     users = movie_rec_db.collection('Users')
     movies = movie_rec_db.collection('Movie')
     ratings_graph = movie_rec_db.collection('Ratings')
+
+    graphs = movie_rec_db._list_graphs()
+    for graph in graphs:
+        my_graph = movie_rec_db._graph(graph)
+        print(my_graph["edgeDefinitions"])
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # Load edges from Ratings collection in ArangoDB and export them to PyG data format.
     edge_index, edge_label = create_pyg_edges(movie_rec_db.aql.execute('FOR doc IN Ratings RETURN doc'))
