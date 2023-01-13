@@ -22,8 +22,5 @@ def test_train_data():
     assert dataset['movie', 'rev_rates', 'user'].edge_index.shape == torch.Size([2, 79848])
 
 
-# def test_dummy():
-#     assert True
-
 # def test_dummy_cache():
 #     assert True
