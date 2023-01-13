@@ -6,6 +6,11 @@ on:
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
 
     runs-on: ubuntu-latest
     steps:
@@ -15,6 +20,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+        cache: 'pip' # caching pip dependencies
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
@@ -22,3 +28,18 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -v
+<<<<<<< HEAD
+
+- name: Get pip cache dir
+      id: pip-cache
+      run: |
+        echo "::set-output name=dir::$(pip cache dir)"
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.pip-cache.outputs.dir }}
+        key: ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-
+=======
+>>>>>>> test
