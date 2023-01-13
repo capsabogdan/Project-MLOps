@@ -1,34 +1,43 @@
 import torch
-import torch.nn.functional as F
-from torch import nn
-from torch_geometric.nn import GCNConv
+from torch.nn import Linear
+import torch_geometric.transforms as T
+from torch_geometric.nn import SAGEConv, to_hetero
 
-class GCN(nn.Module):
-    def __init__(self, hidden_channels: int, num_features: int, num_classes: int, dropout: float
-    ) -> None:
+class GNNEncoder(torch.nn.Module):
+    def __init__(self, hidden_channels, out_channels):
         super().__init__()
-        self.conv1 = GCNConv(num_features, hidden_channels)
-        self.conv2 = GCNConv(hidden_channels, num_classes)
-        self.dropout = nn.Dropout(dropout)
-        self.relu = F.relu()
+        # these convolutions have been replicated to match the number of edge types
+        self.conv1 = SAGEConv((-1, -1), hidden_channels)
+        self.conv2 = SAGEConv((-1, -1), out_channels)
 
-    def forward(self, data):
-        x, edge_index = data.x, data.edge_index
-        
-        x = self.conv1(x, edge_index)
-        x = self.relu(x)
-        x = self.dropout(x)
+    def forward(self, x, edge_index):
+        x = self.conv1(x, edge_index).relu()
         x = self.conv2(x, edge_index)
+        return x
 
-        return F.log_softmax(x, dim=1)
+class EdgeDecoder(torch.nn.Module):
+    def __init__(self, hidden_channels):
+        super().__init__()
+        self.lin1 = Linear(2 * hidden_channels, hidden_channels)
+        self.lin2 = Linear(hidden_channels, 1)
+        
+    def forward(self, z_dict, edge_label_index):
+        row, col = edge_label_index
+        # concat user and movie embeddings
+        z = torch.cat([z_dict['user'][row], z_dict['movie'][col]], dim=-1)
+        # concatenated embeddings passed to linear layer
+        z = self.lin1(z).relu()
+        z = self.lin2(z)
+        return z.view(-1)
 
+class Model(torch.nn.Module):
+    def __init__(self, metadata, hidden_channels):
+        super().__init__()
+        self.encoder = GNNEncoder(hidden_channels, hidden_channels)
+        self.encoder = to_hetero(self.encoder, metadata, aggr='sum')
+        self.decoder = EdgeDecoder(hidden_channels)
 
-def load_checkpoint(filepath):
-    checkpoint = torch.load(filepath)
-    model = GCN(checkpoint["hidden_channels"],
-                checkpoint["num_features"],
-                checkpoint["num_classes"],
-                checkpoint["dropout"])
-    model.load_state_dict(checkpoint['state_dict'])
-
-    return model
+    def forward(self, x_dict, edge_index_dict, edge_label_index):
+        # z_dict contains dictionary of movie and user embeddings returned from GraphSage
+        z_dict = self.encoder(x_dict, edge_index_dict)
+        return self.decoder(z_dict, edge_label_index)
