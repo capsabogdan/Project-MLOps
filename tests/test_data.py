@@ -1,3 +1,7 @@
+import pytest
 import torch
 
-data = torch.load()
+
+@pytest.mark.skip
+def test_something_about_data():
+    pass
