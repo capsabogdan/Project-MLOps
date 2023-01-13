@@ -23,9 +23,14 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install -r cookiecutter_requirements.txt
+        pip install -r cookie_requirements.txt
     - name: Test with pytest
       run: |
         pip install pytest
         pytest -v
 #run
+
+    - name: Get pip cache dir
+      id: pip-cache
+      run: |
+        echo "::set-output name=dir::$(pip cache dir)"
