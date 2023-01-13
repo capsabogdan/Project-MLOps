@@ -41,3 +41,10 @@ class Model(torch.nn.Module):
         # z_dict contains dictionary of movie and user embeddings returned from GraphSage
         z_dict = self.encoder(x_dict, edge_index_dict)
         return self.decoder(z_dict, edge_label_index)
+
+
+    
+def load_checkpoint(filepath):
+    checkpoint = torch.load(filepath)
+    model = Model(checkpoint["hidden_channels"],
+    model.load_state_dict(checkpoint['state_dict']))

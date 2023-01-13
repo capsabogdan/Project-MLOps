@@ -3,10 +3,7 @@ hyperparams:
   lr: 1e-3
   epochs: 100
   seed: 666
- # hidden_channels: 16
-  num_features: 1433
-  num_classes: 7
-#  dropout: 0.5
+  hidden_channels: 16
   checkpoint_name: checkpoint.pt
   load_model_from: /models/
   bucket_name: Project-MLOps
