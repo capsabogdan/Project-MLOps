@@ -16,4 +16,9 @@ setuptools==65.7.0
 torch==1.13.1
 torch_geometric==2.2.0
 torch-sparse==0.6.16
+torch-scatter==2.1.0
+torch-sparse==0.6.16
+torch-tb-profiler==0.4.1
+torchvision==0.14.1
 tqdm==4.64.1
+
