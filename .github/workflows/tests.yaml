@@ -28,6 +28,7 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -v
+<<<<<<< HEAD
 
 - name: Get pip cache dir
       id: pip-cache
@@ -40,3 +41,5 @@ jobs:
         key: ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-
+=======
+>>>>>>> test
