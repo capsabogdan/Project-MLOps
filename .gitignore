@@ -15,6 +15,7 @@ downloads/
 eggs/
 **outputs/
 **temp_data/
+models/checkpoint.*
 .eggs/
 lib/
 lib64/
