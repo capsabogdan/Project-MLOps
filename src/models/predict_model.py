@@ -1,7 +1,7 @@
 from google.cloud import storage
 import torch
 import pandas as pd
-import model
+from src.models import model
 import os
 
 ## Get Model from cloud
@@ -46,7 +46,7 @@ def getMoviesFromCloud():
 def mapMovieIdToTitle(movieMetadata, id):
     movieTitle = movieMetadata[movieMetadata['customId'] == id]['original_title'].values[0]
     return movieTitle
-    
+
 
 def getuserPrediction(importedModel, userId, total_movies, movieMetadata, data):
     user_row = torch.tensor([userId] * total_movies)
@@ -57,12 +57,12 @@ def getuserPrediction(importedModel, userId, total_movies, movieMetadata, data):
     # we will only select movies for the user where the predicting rating is =5
     print(pred)
     rec_movie_ids = (pred > 3).nonzero(as_tuple=True)
-    top_ten_recs = [rec_movies for rec_movies in rec_movie_ids[0].tolist()[:10]] 
-    
+    top_ten_recs = [rec_movies for rec_movies in rec_movie_ids[0].tolist()[:10]]
+
     top_ten_rec_titles = []
     for movieId in top_ten_recs:
         top_ten_rec_titles.append(mapMovieIdToTitle(movieMetadata, movieId))
-        
+
     # print(top_ten_rec_titles)
     return top_ten_recs
 
