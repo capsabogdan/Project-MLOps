@@ -39,12 +39,20 @@ class Model(torch.nn.Module):
 
     def forward(self, x_dict, edge_index_dict, edge_label_index):
         # z_dict contains dictionary of movie and user embeddings returned from GraphSage
+        print("hello")
         z_dict = self.encoder(x_dict, edge_index_dict)
-        return self.decoder(z_dict, edge_label_index)
+
+        retVal = self.decoder(z_dict, edge_label_index)
+        print(retVal)
+        return retVal
 
 
     
 def load_checkpoint(filepath):
+    metadata = (['user', 'movie'], [('user', 'rates', 'movie'), ('movie', 'rev_rates', 'user')])
+
     checkpoint = torch.load(filepath)
-    model = Model(checkpoint["hidden_channels"],
-    model.load_state_dict(checkpoint['state_dict']))
+    model = Model(metadata, checkpoint["hidden_channels"])
+    model.load_state_dict(checkpoint['state_dict'])
+    
+    return model
