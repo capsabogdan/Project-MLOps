@@ -1,0 +1,4 @@
+['remote "raw"']
+    url = gs://movies-mlops/
+['remote "processed"']
+    url = gs://movies-mlops-clean/
