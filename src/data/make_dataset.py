@@ -17,6 +17,7 @@ from torch_geometric.transforms import RandomLinkSplit, ToUndirected
 from sentence_transformers import SentenceTransformer
 from torch_geometric.data import HeteroData
 import itertools
+import subprocess
 
 
 def remove_movies(m_id):
@@ -335,10 +336,10 @@ if __name__ == '__main__':
     movies = movie_rec_db.collection('Movie')
     ratings_graph = movie_rec_db.collection('Ratings')
 
-    graphs = movie_rec_db._list_graphs()
-    for graph in graphs:
-        my_graph = movie_rec_db._graph(graph)
-        print(my_graph["edgeDefinitions"])
+    # graphs = movie_rec_db._list_graphs()
+    # for graph in graphs:
+    #     my_graph = movie_rec_db._graph(graph)
+    #     print(my_graph["edgeDefinitions"])
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # Load edges from Ratings collection in ArangoDB and export them to PyG data format.
@@ -389,5 +390,8 @@ if __name__ == '__main__':
     torch.save(train_data, './data/processed/train.pt')
     torch.save(val_data, './data/processed/val.pt')
     torch.save(test_data, './data/processed/test.pt')
+
+    print('Pushing processed data to dvc...')
+    subprocess.run(['dvc','push','./data/processed/*.pt','-r','processed'])
 
     main()

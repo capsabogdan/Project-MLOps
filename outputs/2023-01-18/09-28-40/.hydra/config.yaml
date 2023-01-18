@@ -1,0 +1,10 @@
+experiments:
+  hyperparams:
+    batch_size: 100
+    lr: 0.001
+    epochs: 100
+    seed: 666
+    hidden_channels: 16
+    checkpoint_name: checkpoint.pt
+    load_model_from: /models/
+    bucket_name: Project-MLOps
