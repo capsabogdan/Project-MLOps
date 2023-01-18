@@ -13,7 +13,8 @@ develop-eggs/
 dist/
 downloads/
 eggs/
-src/models/outputs/
+**outputs/
+**temp_data/
 .eggs/
 lib/
 lib64/
