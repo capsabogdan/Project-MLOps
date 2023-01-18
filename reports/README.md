@@ -385,7 +385,7 @@ end of the project.
 >
 > Answer:
 
---- question 20 fill here ---
+--- ![my_image](figures/Team17_registry.PNG) ---
 
 ### Question 21
 
