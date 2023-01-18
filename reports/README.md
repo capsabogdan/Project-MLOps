@@ -163,7 +163,7 @@ end of the project.
 > *experiments.*
 > Answer:
 
---- question 5 fill here ---
+--- We used the cookiecutter template to initialize our project. In the src/models folder we have made a 'model.py' file which describes our model, a 'train_model.py' script for training the model, and a 'predict_model.py' script for predictng. In the '_init_.py' file we have included some paths. We have filled out the 'make_dataset.py' script in the src/data folder such that it takes the raw data and processes it, and then placed the processed data in the data/processed folder. The data processing includes some data enriching, which is done with the help of the 'oasis.py' script. We use both the raw and processed data folders, but we have removed the external and interim folders. ---
 
 ### Question 6
 
@@ -376,7 +376,7 @@ end of the project.
 >
 > Answer:
 
---- question 19 fill here ---
+--- ![my_image](figures/Team17_buckets.PNG) ---
 
 ### Question 20
 
