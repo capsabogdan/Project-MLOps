@@ -37,7 +37,7 @@ jobs:
       run: mkdir tests/temp_data/
     
     - name: Get Data from Bucket
-      run: gcloud storage cp gs://movies-mlops-clean/train.pt  tests/temp_data/
+      run: gcloud storage cp gs://movies-mlops-clean/train.pt  tests/temp_data/train.pt
 
     - name: Install dependencies
       run: |
