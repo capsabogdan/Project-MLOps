@@ -91,6 +91,4 @@ movie_metadata = getMoviesFromCloud()
 def get_movies_prediction(user_id: int):
    total_movies = 9025
    top_ten_recs , top_ten_rec_titles= getuserPrediction(imported_model, user_id, total_movies, movie_metadata, test_data)
-   print(top_ten_recs)
-
    return {"top_ten_recs": top_ten_rec_titles}

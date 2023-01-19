@@ -1,0 +1,25 @@
+# Base image
+FROM python:3.7-slim
+
+# install python
+RUN apt update && \
+    apt install --no-install-recommends -y build-essential gcc && \
+    apt clean && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /
+
+COPY requirements_docker_inference.txt requirements.txt
+#COPY requirements_docker_train.txt requirements.txt
+COPY setup.py setup.py
+COPY src/ src/
+
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt --no-cache-dir
+RUN pip install -e .
+#RUN pip3 install --verbose --no-cache-dir torch-scatter
+#RUN pip3 install --verbose --no-cache-dir torch-sparse
+
+#ENV GOOGLE_APPLICATION_CREDENTIALS=src/models/service_account.json
+
+# ENTRYPOINT ["python", "-u", "src/models/train_model.py", "hydra.job.chdir=False"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
