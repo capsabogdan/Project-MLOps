@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip install -r requirements_test.txt
+        pip install -r requirements.txt
         pip install -r cookie_requirements.txt
         pip3 install --verbose --no-cache-dir torch-scatter
         pip3 install --verbose --no-cache-dir torch-sparse
