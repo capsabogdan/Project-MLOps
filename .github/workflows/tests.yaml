@@ -16,10 +16,10 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set the credentials
-      run:  cat ${{ secrets.SERVICE_ACCOUNT_CREDENTIALS }} > credentials.json
+      run:  echo '${{ toJSON(secrets.SERVICE_ACCOUNT_CREDENTIALS) }}'  > credentials.json
 
     - name: Test 
-      run: cat toJSON(credentials.json)
+      run: cat credentials.json
 
     - name: Use the credentials
       run: gcloud auth activate-service-account --key-file=credentials.json
