@@ -19,7 +19,7 @@ jobs:
       run:  cat ${{ secrets.SERVICE_ACCOUNT_CREDENTIALS }} > credentials.json
 
     - name: Test 
-      run: cat credentials.json
+      run: cat toJSON(credentials.json)
 
     - name: Use the credentials
       run: gcloud auth activate-service-account --key-file=credentials.json
