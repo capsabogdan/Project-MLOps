@@ -34,7 +34,7 @@ jobs:
       run: gcloud auth activate-service-account --key-file=credentials.json
 
     - name: Create dir
-      run: mkdir tests/temp/
+      run: mkdir tests/temp_data/
     
     - name: Get Data from Bucket
       run: gcloud storage cp gs://movies-mlops-clean/train.pt  tests/temp_data/
