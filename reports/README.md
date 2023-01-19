@@ -58,15 +58,15 @@ end of the project.
 * [x] Add a model file and a training script and get that running
 * [x] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
 * [x] Remember to comply with good coding practices (`pep8`) while doing the project
-* [ ] Do a bit of code typing and remember to document essential parts of your code
+* [x] Do a bit of code typing and remember to document essential parts of your code
 * [x] Setup version control for your data or part of your data
 * [x] Construct one or multiple docker files for your code
 * [x] Build the docker files locally and make sure they work as intended
-* [ ] Write one or multiple configurations files for your experiments
-* [ ] Used Hydra to load the configurations and manage your hyperparameters
+* [x] Write one or multiple configurations files for your experiments
+* [x] Used Hydra to load the configurations and manage your hyperparameters
 * [ ] When you have something that works somewhat, remember at some point to to some profiling and see if
       you can optimize your code
-* [ ] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
+* [x] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
       consider running a hyperparameter optimization sweep.
 * [ ] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
 
@@ -74,14 +74,14 @@ end of the project.
 
 * [x] Write unit tests related to the data part of your code
 * [ ] Write unit tests related to model construction and or model training
-* [ ] Calculate the coverage.
+* [x] Calculate the coverage.
 * [x] Get some continuous integration running on the github repository
 * [x] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
-* [ ] Create a trigger workflow for automatically building your docker images
-* [ ] Get your model training in GCP using either the Engine or Vertex AI
-* [ ] Create a FastAPI application that can do inference using your model
+* [x] Create a trigger workflow for automatically building your docker images
+* [x] Get your model training in GCP using either the Engine or Vertex AI
+* [x] Create a FastAPI application that can do inference using your model
 * [ ] If applicable, consider deploying the model locally using torchserve
-* [ ] Deploy your model in GCP using either Functions or Run as the backend
+* [x] Deploy your model in GCP using either Functions or Run as the backend
 
 ### Week 3
 
@@ -94,9 +94,9 @@ end of the project.
 
 ### Additional
 
-* [ ] Revisit your initial project description. Did the project turn out as you wanted?
-* [ ] Make sure all group members have a understanding about all parts of the project
-* [ ] Uploaded all your code to github
+* [x] Revisit your initial project description. Did the project turn out as you wanted?
+* [x] Make sure all group members have a understanding about all parts of the project
+* [x] Uploaded all your code to github
 
 ## Group information
 
@@ -193,7 +193,7 @@ end of the project.
 >
 > Answer:
 
---- question 7 fill here ---
+--- In total we have implemented 10 tests in our code, which are all related to the data of our project. The first 4 tests are checking that all labels are present in our dataset. The remaining 6 tests are related to the size of the data, with some making sure there are the right number of movies and users, and some checking that the number of edges are also correct. ---
 
 ### Question 8
 
@@ -208,7 +208,7 @@ end of the project.
 >
 > Answer:
 
---- question 8 fill here ---
+--- Our total code coverage is 100%, which suggests that our tests cover our whole code. Since we only have tests related to the dataset, this seems to be too high, and should not be used to imply that our code is error free. Our tests are related to the dataset, and are thus not taking into consideration the model architecture for example which could be a problem. Therefore, a total code coverage of 100% does not necessarily mean that the code is error free, it just means that the tests cover it all. But the better the tests are, the more likely the code is to be error free. ---
 
 ### Question 9
 
@@ -238,7 +238,7 @@ end of the project.
 >
 > Answer:
 
---- question 10 fill here ---
+--- We used DVC for pulling the raw data to our local machines from a Cloud Bucket, and then used it for pushing the processed data to a separate Bucket. Even though our dataset wasn’t particularly large it was convenient for us to have version control, since we were able to store it in a remote location, and simply use “dvc pull” to get the data to our local machine. Another benefit is that if we were to change our dataset (i.e.add more data to it), we could still store the previous version of the dataset in case we wanted to replicate an earlier experiment.---
 
 ### Question 11
 
@@ -254,7 +254,7 @@ end of the project.
 >
 > Answer:
 
---- question 11 fill here ---
+--- For the CI we have set up multiple branches and Github actions. The CI is done for testing and the actions get triggered when merging from **DEV** to **TEST**. ---
 
 ## Running code and tracking experiments
 
@@ -273,7 +273,7 @@ end of the project.
 >
 > Answer:
 
---- question 12 fill here ---
+--- We used config files in our project to configure experiments. We made different config files named ‘exp1’, ‘exp2’, ... where each file contains information such as batch_size, num_epochs, etc. We then also have a ‘default_config’ file which chooses which experiment to run. For a user to run a new experiment they would have to make a new ‘expX’ file with the desired configurations, and then change the ‘default_config’ file to choose that experiment, and then they just run the ‘train_model.py’ script. ---
 
 ### Question 13
 
@@ -288,7 +288,7 @@ end of the project.
 >
 > Answer:
 
---- question 13 fill here ---
+--- We have a folder called ‘outputs’ which stores information about every experiment run. The folder is arranged into sub-folders, one for each day, where in each of those subfolders each experiment is placed in a folder named the exact time of the run. In each experiment folder there is a config file which describes the exact configurations that experiment was run with. These config files are made using hydra. In order to reproduce an experiment, one would have to get the config file from the experiment folder, and use that config file as the config file for a new experiment, as described in question 13. ---
 
 ### Question 14
 
@@ -305,7 +305,9 @@ end of the project.
 >
 > Answer:
 
---- question 14 fill here ---
+--- ![my_image](figures/Team17_wandb.PNG)
+
+ We integrated W&B into our project to log various aspects of our model and training. We used W&B to log training error, validation error, test error, and loss. We have set it up such that whenever a new experiment is run, W&B will automatically log the data to our W&B project. ---
 
 ### Question 15
 
@@ -320,7 +322,13 @@ end of the project.
 >
 > Answer:
 
---- question 15 fill here ---
+— *For our project we developed 2 images: training, and inference. We have created a Docker File for training the model. 
+The TRAINING container is set up to run the hydra configuration in the Dockerfile ENTRYPOINT. ????
+The INFERENCE container is encapsulating the Fast API. To run the container we are running *docker run -p 80:80 <image>*. This allowed us to easily test the model predictions, by sending HTTP requests.
+ 
+ **Dockerfile.train**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.train 
+**Dockerfile.inference**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.inference 
+ ---
 
 ### Question 16
 
@@ -335,7 +343,9 @@ end of the project.
 >
 > Answer:
 
---- question 16 fill here ---
+--- For debugging, we mainly used printing, as this was a quick way for finding hidden behaviour in the code. We have also used *vscode* debug breakpoints, especially as we had issues with the model returning an empty list of movies.
+Finally, we have used experiment logging, creating a W&B report, to better understand the model’s training. - 
+---
 
 ## Working in the cloud
 
@@ -352,7 +362,7 @@ end of the project.
 >
 > Answer:
 
---- We used the following services: Compute Engine, Bucket, Container Registry. Compute Engine is used for creating virtual machines which are highly configurable, e.g. you can configure what hardware you want. Buckets are a cloud storage where you can create "buckets" to store data. Container Registry is used for storing containers such as docker images. ---
+--- We used the following services: Compute Engine, Cloud Storage, Container Registry, VertexAI. Compute Engine is used for creating virtual machines which are highly configurable, e.g. you can configure what hardware you want. Cloud storage is where you can create "buckets" to store data. Container Registry is used for storing containers such as docker images. Vertex AI is used to build and train the model on datasets stored in Cloud Storage  ---
 
 ### Question 18
 
@@ -367,7 +377,15 @@ end of the project.
 >
 > Answer:
 
---- question 18 fill here ---
+--- We have used the Google Compute Engine in Various ways. 
+Our main VM machine has the following characteristics CPU op-mode(s): 32-bit, 64-bit | CPU(s): 2 | SDD: 150 GB
+
+Services
+ * *VertexAI* for dynamically running the trainer container.  
+* *Buckets* of Cloud Storage for storing the data and our model checkpoints
+* *Cloud Build* for creating triggers spinning the Training container. We also used this service to expose the Inference container in a web service API.
+
+Finally, some of us have used VM instances for developing purposes, connecting their VS session with the remote. ---
 
 ### Question 19
 
@@ -394,7 +412,7 @@ end of the project.
 >
 > Answer:
 
---- ![my_image](figures/build.png)---
+--- ![my_image](figures/build.png) ---
 
 ### Question 22
 
@@ -408,9 +426,12 @@ end of the project.
 > *worked. Afterwards we deployed it in the cloud, using ... . To invoke the service an user would call*
 > *`curl -X POST -F "file=@file.json"<weburl>`*
 >
-> Answer:
+> Answer: 
+—
+For the model deployment, we have created a Docker file, creating an image that, containerizes the training, when built. We have pushed this image to the container registry and set up a pipeline, where pull requests from *test* branch to *main* would trigger the entire built, through VertexAI.
+To invoke the service , the user needs to call curl -X GET "https://gcp-movie-app-v3-qp7ixpl7fq-ew.a.run.app/predict/100"
+---
 
---- question 22 fill here ---
 
 ### Question 23
 
@@ -425,7 +446,9 @@ end of the project.
 >
 > Answer:
 
---- question 23 fill here ---
+--- We did not implement monitoring, but our idea would be to implement Data Drifting monitoring, creating reports with *evidently*, which may help in debugging, exploring and reporting the model’s results
+Additionally, we would like to monitor our system, through the use of telemetry. Thus, in our implementation, we would integrate *opentelemetry* with our *fastapi* to extract relevant data and then visualize them through *Signoz*.
+ ---
 
 ### Question 24
 
@@ -439,7 +462,7 @@ end of the project.
 >
 > Answer:
 
---- question 24 fill here ---
+--- We ended up using between around 40-60$ with.the most expensive being Cloud Logging,  Cloud Functions, and Cloud Run. ---
 
 ## Overall discussion of project
 
@@ -460,7 +483,11 @@ end of the project.
 >
 > Answer:
 
---- question 25 fill here ---
+--- ![my_image](figures/Team17_architecture.PNG)
+The project structure is based on the cookieCutter template. We are making use of DVC to pull the raw data from the Cloud Buckets, then process the data through the make file and push it to a separate Bucket. Besides, we have set up Github Actions for Continuous Integration and deployed both training and inference as Docker containers in the Cloud Registry. The training container gets built for every pull request from *test* branch to *main*, through the *VertexAI* service, which will run the training, and output the model’s performance.    
+Finally, the inference is executed through the fastAPI, which exposes the Docker Inference image in a WebService in the CloudRun Service  - https://gcp-movie-app-v3-qp7ixpl7fq-ew.a.run.app
+
+ ---
 
 ### Question 26
 
@@ -474,7 +501,7 @@ end of the project.
 >
 > Answer:
 
---- question 26 fill here ---
+--- The main struggle were the security and authorization, managing the complex pipeline and the large number of dependencies, especially with regards to the great size of certain packages, such as *torch-geometric* and *torch-geometric*. Some other struggles were the code versioning, merge conflicts, different hardware architectures, reflected in the uniqueness of the docker containers. Another challenge was to set up remote connection from VSCode to the cloud VM instance.  ---
 
 ### Question 27
 
@@ -491,4 +518,11 @@ end of the project.
 >
 > Answer:
 
---- question 27 fill here ---
+--- Alexandra Polymenopoulou s212558 was in charge of: Training Deployment, modelling, W&B, Hydra
+Bogdan Capsa s210172 was in charge of: FASTApi Deployment, GithubActions, DVC
+Jakob Fahl s184419 was in charge of W&B, MakeData, DVC, modelling
+Melina Siskou s213158 was in charge of: FASTApi Deployment, MakeData, unit tests 
+Thomas Spyrou s213161 was in charge of Docker Training Deployment, GithubActions, unit tests
+ ---
+
+
