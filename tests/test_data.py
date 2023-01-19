@@ -3,7 +3,8 @@ import pytest
 import torch
 import json
 from google.cloud import storage
-
+from google.oauth2.credentials import Credentials
+from google.oauth2 import service_account
 
 BUCKET_NAME = "movies-mlops-clean"
 FILE_NAMES = ["train.pt", "test.pt", "val.pt"]
@@ -16,7 +17,8 @@ train_data_path = "tests/temp_data/train.pt"
 @pytest.fixture
 def train_dataset():
     # download & load data
-    storage_client = storage.Client(project="zeroshots")
+    creds = service_account.Credentials.from_service_account_file(json.loads(os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')))
+    storage_client = storage.Client(project="zeroshots", credentials=creds)
 
     if not os.path.exists(PATH_TO_DOWNLOAD):
         os.mkdir(PATH_TO_DOWNLOAD)
