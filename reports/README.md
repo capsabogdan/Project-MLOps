@@ -193,7 +193,7 @@ end of the project.
 >
 > Answer:
 
---- question 7 fill here ---
+--- In total we have implemented 10 tests in our code, which are all related to the data of our project. The first 4 tests are checking that all labels are present in our dataset. The remaining 6 tests are related to the size of the data, with some making sure there are the right number of movies and users, and some checking that the number of edges are also correct. ---
 
 ### Question 8
 
@@ -208,7 +208,7 @@ end of the project.
 >
 > Answer:
 
---- question 8 fill here ---
+--- Our total code coverage is 100%, which suggests that our tests cover our whole code. Since we only have tests related to the dataset, this seems to be too high, and should not be used to imply that our code is error free. Our tests are related to the dataset, and are thus not taking into consideration the model architecture for example which could be a problem. Therefore, a totla code coverage of 100% does not necessarily mean that the code is error free, it just means that the tests cover it all. But the better the tests are, the more likely the code is to be error free. ---
 
 ### Question 9
 
@@ -305,7 +305,7 @@ end of the project.
 >
 > Answer:
 
---- question 14 fill here ---
+--- ![my_image](figures/Team17_wandb.PNG) \n We integrated W&B into our project to log various aspects of our model and training. ---
 
 ### Question 15
 
