@@ -1,7 +1,6 @@
 import os
 import pytest
 import torch
-import json
 from google.cloud import storage
 
 BUCKET_NAME = "movies-mlops-clean"
