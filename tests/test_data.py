@@ -17,7 +17,9 @@ train_data_path = "tests/temp_data/train.pt"
 @pytest.fixture
 def train_dataset():
     # download & load data
-    creds = service_account.Credentials.from_service_account_file(json.loads(os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')))
+    json_file = json.loads(os.environ.get('GOOGLE_APPLICATION_CREDENTIALS'))
+    print(json_file)
+    creds = service_account.Credentials.from_service_account_file(json_file)
     storage_client = storage.Client(project="zeroshots", credentials=creds)
 
     if not os.path.exists(PATH_TO_DOWNLOAD):
