@@ -119,7 +119,7 @@ def train(config: DictConfig) -> None:
     optimizer = torch.optim.Adam(model.parameters(), lr=hparams["lr"], weight_decay=5e-4)
 
     # Train model
-    for epoch in range(3):  #(hparams["epochs"]):
+    for epoch in range(hparams["epochs"]):
 
         #TRAIN
         optimizer.zero_grad()
@@ -153,9 +153,7 @@ def train(config: DictConfig) -> None:
                   'state_dict': model.state_dict()}
     torch.save(checkpoint, filename)  
 
-
     push_model_to_cloud('movie-rec-model-checkpoints', filename, hparams["checkpoint_name"])
-
 
 
 if __name__ == "__main__":
