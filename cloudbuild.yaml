@@ -1,0 +1,5 @@
+steps:
+   - name: 'gcr.io/cloud-builders/movies-docker'
+     args: ['build', '-t', 'gcr.io/zeroshots/movie_rec_v2', '.']
+   - name: 'gcr.io/cloud-builders/movies-docker'
+     args: ['push', 'gcr.io/zeroshots/movie_rec_v2']

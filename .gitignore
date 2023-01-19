@@ -13,6 +13,9 @@ develop-eggs/
 dist/
 downloads/
 eggs/
+**outputs/
+**temp_data/
+models/checkpoint.*
 .eggs/
 lib/
 lib64/
@@ -74,9 +77,10 @@ target/
 
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
-
-# exclude data from source control by default
-/data/
+src/models/service_account.json
+/wandb/*
+# exclude raw data from source control by default
+/data/raw
 
 # Mac OS-specific storage files
 .DS_Store
@@ -87,4 +91,3 @@ target/
 
 # Mypy cache
 .mypy_cache/
-/data

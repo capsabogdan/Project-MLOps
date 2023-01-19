@@ -6,15 +6,17 @@ RUN apt update && \
     apt install --no-install-recommends -y build-essential gcc && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt requirements.txt
-COPY mlops_env.txt mlops_env.txt
+COPY requirements_docker_train.txt requirements.txt
 COPY setup.py setup.py
 COPY src/ src/
-COPY data/ data/
 
 WORKDIR /
-RUN pip install -r requirements.txt --no-cache-dir
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt --no-cache-dir
+RUN pip install -e .
+RUN pip3 install --verbose --no-cache-dir torch-scatter
+RUN pip3 install --verbose --no-cache-dir torch-sparse
 
-ENTRYPOINT ["python", "-u", "src/models/train_model.py"]
+ENV GOOGLE_APPLICATION_CREDENTIALS=src/models/service_account.json
 
-
+ENTRYPOINT ["python", "-u", "src/models/train_model.py", "hydra.job.chdir=False"]

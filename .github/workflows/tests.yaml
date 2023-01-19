@@ -6,19 +6,59 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+        cache: 'pip' # caching pip dependencies
+
+    - name: Set the credentials
+      run: echo $GOOGLE_APPLICATION_CREDENTIALS  > credentials.json
+
+    - name: Use the secret
+      run: |
+        echo $GOOGLE_APPLICATION_CREDENTIALS
+
+    - name: Use the credentials
+      run: gcloud auth activate-service-account --key-file=credentials.json
+
+    - name: Create dir
+      run: mkdir tests/temp_data/
+    
+    - name: Get Data from Bucket
+      run: gcloud storage cp gs://movies-mlops-clean/train.pt  tests/temp_data/train.pt
+
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install -r cookie_requirements.txt
+        pip3 install --verbose --no-cache-dir torch-scatter
+        pip3 install --verbose --no-cache-dir torch-sparse
+   
     - name: Test with pytest
       run: |
+        pip install pytest
         pytest -v
+
+    - name: Get pip cache dir
+      id: pip-cache
+      run: |
+        echo "::set-output name=dir::$(pip cache dir)"
+
+# doe sit cache????
+
+# TODO:
+#  matrix:
+#         python-version: ["2.7", "3.7", "3.8", "3.9", "3.10"]
