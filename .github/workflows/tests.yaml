@@ -23,6 +23,16 @@ jobs:
         python-version: 3.8
         cache: 'pip' # caching pip dependencies
 
+    - name: Set the credentials
+      run: echo ${{ GOOGLE_APPLICATION_CREDENTIALS }}  > credentials.json
+
+    - name: Use the secret
+      run: |
+        echo $GOOGLE_APPLICATION_CREDENTIALS
+
+    - name: Use the credentials
+      run: gcloud auth activate-service-account --key-file=credentials.json
+
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
