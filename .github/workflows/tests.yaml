@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set the credentials
-      run:  echo ${{ secrets.SERVICE_ACCOUNT_CREDENTIALS }} > credentials.json
+      run:  echo '${{ toJSON(secrets.SERVICE_ACCOUNT_CREDENTIALS) }}' > credentials.json
 
     - name: Test 
       run: cat credentials.json
