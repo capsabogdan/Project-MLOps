@@ -480,7 +480,9 @@ Additionally, we would like to monitor our system, through the use of telemetry.
 >
 > Answer:
 
---- ![my_image](figures/Team17_architecture.PNG) The project structure is based on the cookieCutter template. We are making use of DVC to pull the raw data from the Cloud Buckets, then process the data through the make file and push it to a separate Bucket. Besides, we have set up Github Actions for Continuous Integration and deployed both training and inference as Docker containers in the Cloud Registry. The training container gets built for every pull request from *test* branch to *main*, through the *VertexAI* service, which will run the training, and output the model’s performance.    
+--- ![my_image](figures/Team17_architecture.png)
+      
+      The project structure is based on the cookieCutter template. We are making use of DVC to pull the raw data from the Cloud Buckets, then process the data through the make file and push it to a separate Bucket. Besides, we have set up Github Actions for Continuous Integration and deployed both training and inference as Docker containers in the Cloud Registry. The training container gets built for every pull request from *test* branch to *main*, through the *VertexAI* service, which will run the training, and output the model’s performance.    
 Finally, the inference is executed through the fastAPI, which exposes the Docker Inference image in a WebService in the CloudRun Service  - https://gcp-movie-app-v3-qp7ixpl7fq-ew.a.run.app ---
 
 ### Question 26
