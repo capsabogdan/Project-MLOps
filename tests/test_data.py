@@ -16,7 +16,7 @@ train_data_path = "tests/temp_data/train.pt"
 @pytest.fixture
 def train_dataset():
     # download & load data
-    storage_client = storage.Client(project="zeroshots", )
+    storage_client = storage.Client(project="zeroshots")
 
     if not os.path.exists(PATH_TO_DOWNLOAD):
         os.mkdir(PATH_TO_DOWNLOAD)
