@@ -1,0 +1,1 @@
+{"Training loss": 5.846927165985107, "_timestamp": 1674139404.8886733, "_runtime": 138.68875432014465, "_step": 399, "Training RMSE": 1.3488723039627075, "Validation RMSE": 1.3785606622695923, "Test RMSE": 1.3763997554779053, "_wandb": {"runtime": 138}}

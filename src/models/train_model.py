@@ -3,6 +3,7 @@ import hydra
 import torch
 import time
 import torch.nn.functional as F
+import wandb
 from google.cloud import storage 
 from omegaconf import DictConfig, OmegaConf
 from src.models.model import Model
@@ -92,7 +93,8 @@ def train(config: DictConfig) -> None:
     """
     # log = logging.getLogger(__name__)
     # print = log.info
-    # # wandb.init(project="Project-MLOps", entity="Project-MLOps")
+    wandb.init(project="Project-MLOps", entity="awesome_17")
+    
 
     device = "cpu"  #"cuda" if torch.cuda.is_available() else "cpu"
     train_data, test_data, val_data = read_data()
@@ -100,7 +102,7 @@ def train(config: DictConfig) -> None:
     print("Training")
     print(f"configuration: \n {OmegaConf.to_yaml(config)}")
     hparams = config.experiments.hyperparams
-    # wandb.config = hparams
+    wandb.config = hparams
     torch.manual_seed(hparams["seed"])
 
     # Model
@@ -110,17 +112,20 @@ def train(config: DictConfig) -> None:
     model = Model(metadata,
         hidden_channels=hparams["hidden_channels"],
     )
-
+    
     model = model.to(device)
+
 
     with torch.no_grad():
         model.encoder(train_data.x_dict, train_data.edge_index_dict)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=hparams["lr"], weight_decay=5e-4)
 
+    wandb.watch(model, optimizer, log='all')
+
     # Train model
     for epoch in range(hparams["epochs"]):
-
+        
         #TRAIN
         optimizer.zero_grad()
         pred = model(train_data.x_dict, train_data.edge_index_dict,
@@ -139,8 +144,17 @@ def train(config: DictConfig) -> None:
 
         print(f'Epoch: {epoch:03d}, Loss: {loss:.4f}, Train: {train_rmse:.4f}, '
           f'Val: {val_rmse:.4f}, Test: {test_rmse:.4f}')
-#       wandb.log({"Training loss": loss})
-#       wandb.log({"Training loss": loss})
+        wandb.log({"Training loss": loss})
+        wandb.log({"Training RMSE": train_rmse})
+        wandb.log({"Validation RMSE": val_rmse})
+        wandb.log({"Test RMSE": test_rmse})
+
+    # # Log the weights and bias histogram
+    # for name, param in model.named_parameters():
+    #     if 'weight' in name:
+    #         wandb.log({name: wandb.Histogram(param.detach().numpy())})
+    #     elif 'bias' in name:
+    #         wandb.log({name: wandb.Histogram(param.detach().numpy())})
 
     orig_cwd = hydra.utils.get_original_cwd()
 
@@ -153,7 +167,7 @@ def train(config: DictConfig) -> None:
                   'state_dict': model.state_dict()}
     torch.save(checkpoint, filename)  
 
-    push_model_to_cloud('movie-rec-model-checkpoints', filename, hparams["checkpoint_name"])
+    #push_model_to_cloud('movie-rec-model-checkpoints', filename, hparams["checkpoint_name"])
 
 
 if __name__ == "__main__":
