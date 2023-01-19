@@ -322,7 +322,7 @@ end of the project.
 >
 > Answer:
 
-— *For our project we developed 2 images: training, and inference. We have created a Docker File for training the model. 
+--- For our project we developed 2 images: training, and inference. We have created a Docker File for training the model. 
 The TRAINING container is set up to run the hydra configuration in the Dockerfile ENTRYPOINT. ????
 The INFERENCE container is encapsulating the Fast API. To run the container we are running *docker run -p 80:80 <image>*. This allowed us to easily test the model predictions, by sending HTTP requests.
  
