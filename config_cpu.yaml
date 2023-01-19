@@ -5,3 +5,6 @@ workerPoolSpecs:
    replicaCount: 1
    containerSpec:
       imageUri: gcr.io/zeroshots/trainer_v2
+      env:
+         - name: WANDB_API_KEY
+           value: 36c04f86a71d9b5d9d9c25dcbb3b16e5177b85fa

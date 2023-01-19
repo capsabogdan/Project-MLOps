@@ -114,7 +114,7 @@ end of the project.</p>
 <em>complete copy of our development enviroment, one would have to run the following commands</em></p>
 <p>Answer:</p>
 </blockquote>
-<p>--- We used the pipreqs package, as well as some manual additions, to manage our dependencies. We ran the pipreqs command in our project to generate a 'requirements.txt' file with the libraries, and the versions, required for our project. We experienced some problems with some of the libraries such as torch-geometric, so for those we would sometimes have to manually change the order and version of the install. We also have a 'requirements_docker_train.txt' file, which is used when making a docker image. To get a complete copy of our dependencies, one would have to make a new empty python environment, go to the project root, and run "pip install -r requirements.txt" ---</p>
+<p>--- We used the pipreqs package, as well as some manual additions, to manage our dependencies. We ran the pipreqs command in our project to generate a 'requirements.txt' file with the libraries, and their versions, required for our project. We experienced some problems with some of the libraries such as torch-geometric, so for those we would sometimes have to manually change the order and version of the install. We also have a 'requirements_docker_train.txt' file, which is used when making a docker image. To get a complete copy of our dependencies, one would have to make a new empty python environment, go to the project root, and run "pip install -r requirements.txt" ---</p>
 <h3>Question 5</h3>
 <blockquote>
 <p><strong>We expect that you initialized your project using the cookiecutter template. Explain the overall structure of your</strong>
@@ -233,7 +233,7 @@ especially the reproducibility of your experiments.</p>
 <em>As seen in the second image we are also tracking ... and ...</em></p>
 <p>Answer:</p>
 </blockquote>
-<p>--- question 14 fill here ---</p>
+<p>--- <img alt="my_image" src="figures/Team17_wandb.PNG" /> ---</p>
 <h3>Question 15</h3>
 <blockquote>
 <p><strong>Docker is an important tool for creating containerized applications. Explain how you used docker in your</strong>
@@ -268,7 +268,7 @@ especially the reproducibility of your experiments.</p>
 <em>We used the following two services: Engine and Bucket. Engine is used for... and Bucket is used for...</em></p>
 <p>Answer:</p>
 </blockquote>
-<p>--- question 17 fill here ---</p>
+<p>--- We used the following services: Compute Engine, Bucket, Container Registry. Compute Engine is used for creating virtual machines which are highly configurable, e.g. you can configure what hardware you want. Buckets are a cloud storage where you can create "buckets" to store data. Container Registry is used for storing containers such as docker images. ---</p>
 <h3>Question 18</h3>
 <blockquote>
 <p><strong>The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs</strong>
