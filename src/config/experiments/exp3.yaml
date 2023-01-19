@@ -1,0 +1,9 @@
+hyperparams:
+  batch_size: 100
+  lr: 3e-3
+  epochs: 100
+  seed: 445
+  hidden_channels: 8
+  checkpoint_name: checkpoint3.pt
+  load_model_from: /models/
+  bucket_name: Project-MLOps

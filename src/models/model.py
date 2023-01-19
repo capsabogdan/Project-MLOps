@@ -39,11 +39,11 @@ class Model(torch.nn.Module):
 
     def forward(self, x_dict, edge_index_dict, edge_label_index):
         # z_dict contains dictionary of movie and user embeddings returned from GraphSage
-        print("hello")
+        # print("hello")
         z_dict = self.encoder(x_dict, edge_index_dict)
 
         retVal = self.decoder(z_dict, edge_label_index)
-        print(retVal)
+        # print(retVal)
         return retVal
 
 

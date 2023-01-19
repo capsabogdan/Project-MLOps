@@ -129,7 +129,7 @@ end of the project.
 >
 > Answer:
 
---- question 3 fill here ---
+--- We used the third-party framework Pytorch-Geometric, which is a deep learning framework for geometric data such as graphs. This framework was extremely beneficial for us as we were working with graphical data - movie predictions based on user ratings. We used Pytorch-Geometric to set up the graphs when we were making the datasets. Furthermore, from Pytorch-Geometric we used the SAGEConv class in the GNNEncoder part of our model. In our projet we also use the Pytorch framework, which made the handling of tensors convenient. We also used the torch.nn.Linear class for making the FC layers in our EdgeDecoder part of our model. ---
 
 ## Coding environment
 
@@ -148,7 +148,7 @@ end of the project.
 >
 > Answer:
 
---- question 4 fill here ---
+--- We used the pipreqs package, as well as some manual additions, to manage our dependencies. We ran the pipreqs command in our project to generate a 'requirements.txt' file with the libraries, and their versions, required for our project. We experienced some problems with some of the libraries such as torch-geometric, so for those we would sometimes have to manually change the order and version of the install. We also have a 'requirements_docker_train.txt' file, which is used when making a docker image. To get a complete copy of our dependencies, one would have to make a new empty python environment, go to the project root, and run "pip install -r requirements.txt" ---
 
 ### Question 5
 
@@ -174,7 +174,7 @@ end of the project.
 >
 > Answer:
 
---- question 6 fill here ---
+--- We wrote our code following the pep8 protocol, to have a single style for our whole project and make it easier for all our members to read the other members' code. We also used isort for sorting our imports. For the 'make_dataset.py' script, we implemented code from this [this](https://medium.com/arangodb/integrate-arangodb-with-pytorch-geometric-to-build-recommendation-systems-dd69db688465) blog post, thus we decided to just leave the code format as it was. Following a specific code format such as pep8 is important in large projects because this means that code written from different users will be in the same format and thus more understandable. ---
 
 ## Version control
 
@@ -223,7 +223,7 @@ end of the project.
 >
 > Answer:
 
---- question 9 fill here ---
+--- In our GitHub repository we used three branches: master, test, and dev. In our master branch we have our producting-ready code, which is code that we know is running as it should (but at the start of the project it didn't have all the right functionality). When we were developing our model, data, training, etc. we would all push to the dev branch. When pushing to the dev branch no tests are performed, making the process faster. This is useful when we are just making small changes or fixes, e.g. spelling mistakes. We would then merge the dev branch to the test branch, where we would perform our tests. This process takes a bit of time, but since we don't do it as often this is not a problem. When we have code that we are satisfied with in our test branch, we would send a pull request to the master branch. ---
 
 ### Question 10
 
@@ -352,7 +352,7 @@ end of the project.
 >
 > Answer:
 
---- question 17 fill here ---
+--- We used the following services: Compute Engine, Bucket, Container Registry. Compute Engine is used for creating virtual machines which are highly configurable, e.g. you can configure what hardware you want. Buckets are a cloud storage where you can create "buckets" to store data. Container Registry is used for storing containers such as docker images. ---
 
 ### Question 18
 
