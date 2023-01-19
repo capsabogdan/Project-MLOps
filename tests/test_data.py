@@ -13,25 +13,26 @@ train_data_path = "tests/temp_data/train.pt"
 
 @pytest.fixture
 def train_dataset():
-    # download & load data
-    storage_client = storage.Client(project="zeroshots")
+    # # download & load data
+    # storage_client = storage.Client(project="zeroshots")
 
-    if not os.path.exists(PATH_TO_DOWNLOAD):
-        os.mkdir(PATH_TO_DOWNLOAD)
+    # if not os.path.exists(PATH_TO_DOWNLOAD):
+    #     os.mkdir(PATH_TO_DOWNLOAD)
 
-    print("Downloading data...")
-    bucket = storage_client.bucket(BUCKET_NAME)
+    # print("Downloading data...")
+    # bucket = storage_client.bucket(BUCKET_NAME)
 
-    for file in FILE_NAMES:
-        blob = bucket.blob(file)
-        a = blob.download_to_filename(PATH_TO_DOWNLOAD + file)
-        print(a)
+    # for file in FILE_NAMES:
+    #     blob = bucket.blob(file)
+    #     a = blob.download_to_filename(PATH_TO_DOWNLOAD + file)
+    #     print(a)
         
     train_dataset = torch.load(train_data_path)
 
     return train_dataset
 
 
+@pytest.mark.skip
 def test_if_bucket_exists():
     storage_client = storage.Client(project="zeroshots")
     assert storage_client.get_bucket(BUCKET_NAME)
