@@ -11,18 +11,11 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: Set the credentials
-      run:  echo '${{ toJSON(secrets.SERVICE_ACCOUNT_CREDENTIALS) }}'  > credentials.json
-
-    - name: Test 
-      run: cat credentials.json
-
-    - name: Use the credentials
-      run: gcloud auth activate-service-account --key-file=credentials.json
 
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
@@ -35,8 +28,8 @@ jobs:
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r cookie_requirements.txt
-        pip3 install --verbose --no-cache-dir torch-scatter
-        pip3 install --verbose --no-cache-dir torch-sparse
+        # pip3 install --verbose --no-cache-dir torch-scatter
+        # pip3 install --verbose --no-cache-dir torch-sparse
     - name: Test with pytest
       run: |
         pip install pytest
