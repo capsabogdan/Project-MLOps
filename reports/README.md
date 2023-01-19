@@ -326,8 +326,9 @@ end of the project.
 The TRAINING container is set up to run the hydra configuration in the Dockerfile ENTRYPOINT. ????
 The INFERENCE container is encapsulating the Fast API. To run the container we are running *docker run -p 80:80 <image>*. This allowed us to easily test the model predictions, by sending HTTP requests.
  
-*Dockerfile.train*: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.train 
-*Dockerfile.inference*: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.inference ---
+**Dockerfile.train**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.train
+      
+**Dockerfile.inference**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.inference ---
 
 ### Question 16
 
