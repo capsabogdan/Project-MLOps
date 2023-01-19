@@ -24,22 +24,20 @@ jobs:
         cache: 'pip' # caching pip dependencies
 
     - name: Set the credentials
-      run: echo $GOOGLE_APPLICATION_CREDENTIALS  > credentials.json
+      run: echo $GOOGLE_APPLICATION_CREDENTIALS  > service_acount.json
 
     - name: Use the secret
       run: |
         echo $GOOGLE_APPLICATION_CREDENTIALS
 
     - name: Use the credentials
-      run: gcloud auth activate-service-account --key-file=credentials.json
+      run: gcloud auth activate-service-account --key-file=service_account.json
 
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r cookie_requirements.txt
-        # pip3 install --verbose --no-cache-dir torch-scatter
-        # pip3 install --verbose --no-cache-dir torch-sparse
    
     - name: Test with pytest
       run: |
