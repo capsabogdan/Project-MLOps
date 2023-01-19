@@ -326,9 +326,8 @@ end of the project.
 The TRAINING container is set up to run the hydra configuration in the Dockerfile ENTRYPOINT. ????
 The INFERENCE container is encapsulating the Fast API. To run the container we are running *docker run -p 80:80 <image>*. This allowed us to easily test the model predictions, by sending HTTP requests.
  
-*Dockerfile.train**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.train 
-*Dockerfile.inference**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.inference 
- ---
+*Dockerfile.train*: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.train 
+*Dockerfile.inference*: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.inference ---
 
 ### Question 16
 
@@ -482,7 +481,7 @@ Additionally, we would like to monitor our system, through the use of telemetry.
 
 --- ![my_image](figures/Team17_architecture.png)
       
-      The project structure is based on the cookieCutter template. We are making use of DVC to pull the raw data from the Cloud Buckets, then process the data through the make file and push it to a separate Bucket. Besides, we have set up Github Actions for Continuous Integration and deployed both training and inference as Docker containers in the Cloud Registry. The training container gets built for every pull request from *test* branch to *main*, through the *VertexAI* service, which will run the training, and output the model’s performance.    
+The project structure is based on the cookieCutter template. We are making use of DVC to pull the raw data from the Cloud Buckets, then process the data through the make file and push it to a separate Bucket. Besides, we have set up Github Actions for Continuous Integration and deployed both training and inference as Docker containers in the Cloud Registry. The training container gets built for every pull request from *test* branch to *main*, through the *VertexAI* service, which will run the training, and output the model’s performance.    
 Finally, the inference is executed through the fastAPI, which exposes the Docker Inference image in a WebService in the CloudRun Service  - https://gcp-movie-app-v3-qp7ixpl7fq-ew.a.run.app ---
 
 ### Question 26
