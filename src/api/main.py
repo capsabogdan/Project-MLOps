@@ -36,7 +36,7 @@ def getModelFromCloud():
 
 
 ## Get Processed test data from cloud
-def getTestDataFromCloud():
+def gettest_dataFromCloud():
     storage_client = storage.Client()
     bucket = storage_client.bucket("movies-mlops-clean")
     blob = bucket.blob("test.pt")
@@ -58,16 +58,16 @@ def getMoviesFromCloud():
     return movie_metadata
 
 
-def mapMovieIdToTitle(movieMetadata, id):
-    movieTitle = movieMetadata[movieMetadata['customId'] == id]['original_title'].values[0]
+def mapMovieIdToTitle(movie_metadata, id):
+    movieTitle = movie_metadata[movie_metadata['customId'] == id]['original_title'].values[0]
     return movieTitle
 
 
-def getuserPrediction(importedModel, userId, total_movies, movieMetadata, data):
+def getuserPrediction(imported_model, userId, total_movies, movie_metadata, data):
     user_row = torch.tensor([userId] * total_movies)
     all_movie_ids = torch.arange(total_movies)
     edge_label_index = torch.stack([user_row, all_movie_ids], dim=0)
-    pred = importedModel(data.x_dict, data.edge_index_dict, edge_label_index)
+    pred = imported_model(data.x_dict, data.edge_index_dict, edge_label_index)
     pred = pred.clamp(min=0, max=5)
     # we will only select movies for the user where the predicting rating is =5
     print(pred)
@@ -76,20 +76,21 @@ def getuserPrediction(importedModel, userId, total_movies, movieMetadata, data):
 
     top_ten_rec_titles = []
     for movieId in top_ten_recs:
-        top_ten_rec_titles.append(mapMovieIdToTitle(movieMetadata, movieId))
+        top_ten_rec_titles.append(mapMovieIdToTitle(movie_metadata, movieId))
 
     # print(top_ten_rec_titles)
     return top_ten_recs, top_ten_rec_titles
 
+
+imported_model = getModelFromCloud()
+test_data = gettest_dataFromCloud()
+movie_metadata = getMoviesFromCloud()
+
+
 @app.get("/predict/{user_id}")
 def get_movies_prediction(user_id: int):
-   importedModel = getModelFromCloud()
-   testData = getTestDataFromCloud()
-   movieMetadata = getMoviesFromCloud()
-
    total_movies = 9025
-
-   top_ten_recs , top_ten_rec_titles= getuserPrediction(importedModel, user_id, total_movies, movieMetadata, testData)
+   top_ten_recs , top_ten_rec_titles= getuserPrediction(imported_model, user_id, total_movies, movie_metadata, test_data)
    print(top_ten_recs)
 
    return {"top_ten_recs": top_ten_rec_titles}
