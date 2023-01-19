@@ -12,7 +12,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     env:
-      GOOGLE_APPLICATION_CREDENTIALS: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' 
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
