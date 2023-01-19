@@ -148,7 +148,7 @@ end of the project.
 >
 > Answer:
 
---- We used the pipreqs package, as well as some manual additions, to manage our dependencies. We ran the pipreqs command in our project to generate a 'requirements.txt' file with the libraries, and the versions, required for our project. We experienced some problems with some of the libraries such as torch-geometric, so for those we would sometimes have to manually change the order and version of the install. We also have a 'requirements_docker_train.txt' file, which is used when making a docker image. To get a complete copy of our dependencies, one would have to make a new empty python environment, go to the project root, and run "pip install -r requirements.txt" ---
+--- We used the pipreqs package, as well as some manual additions, to manage our dependencies. We ran the pipreqs command in our project to generate a 'requirements.txt' file with the libraries, and their versions, required for our project. We experienced some problems with some of the libraries such as torch-geometric, so for those we would sometimes have to manually change the order and version of the install. We also have a 'requirements_docker_train.txt' file, which is used when making a docker image. To get a complete copy of our dependencies, one would have to make a new empty python environment, go to the project root, and run "pip install -r requirements.txt" ---
 
 ### Question 5
 
@@ -352,7 +352,7 @@ end of the project.
 >
 > Answer:
 
---- question 17 fill here ---
+--- We used the following services: Compute Engine, Bucket, Container Registry. Compute Engine is used for creating virtual machines which are highly configurable, e.g. you can configure what hardware you want. Buckets are a cloud storage where you can create "buckets" to store data. Container Registry is used for storing containers such as docker images. ---
 
 ### Question 18
 
