@@ -24,7 +24,7 @@ jobs:
         cache: 'pip' # caching pip dependencies
 
     - name: Set the credentials
-      run: echo $GOOGLE_APPLICATION_CREDENTIALS  > credentials.json
+      run: echo $GOOGLE_APPLICATION_CREDENTIALS  > tests/credentials.json
 
     - name: Use the secret
       run: |
