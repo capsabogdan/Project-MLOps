@@ -394,7 +394,7 @@ end of the project.
 >
 > Answer:
 
---- question 21 fill here ---
+--- ![my_image](figures/build.png)---
 
 ### Question 22
 
