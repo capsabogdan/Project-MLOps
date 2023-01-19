@@ -51,6 +51,21 @@ def read_data():
     return train_data, test_data, val_data
 
 
+def push_model_to_cloud(bucket_name, source_file_name, destination_blob_name):
+    storage_client = storage.Client(project='zeroshots')
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+
+    blob.upload_from_filename(source_file_name)
+
+    print(
+        "File {} uploaded to {}.".format(
+            source_file_name, destination_blob_name
+        )
+    )    
+
+
+
 def test(data, model):
     """
     Evaluates model on data and returns accuracy.
@@ -104,7 +119,7 @@ def train(config: DictConfig) -> None:
     optimizer = torch.optim.Adam(model.parameters(), lr=hparams["lr"], weight_decay=5e-4)
 
     # Train model
-    for epoch in range(hparams["epochs"]):
+    for epoch in range(3):  #(hparams["epochs"]):
 
         #TRAIN
         optimizer.zero_grad()
@@ -139,7 +154,7 @@ def train(config: DictConfig) -> None:
     torch.save(checkpoint, filename)  
 
 
-
+    push_model_to_cloud('movie-rec-model-checkpoints', filename, hparams["checkpoint_name"])
 
 
 
