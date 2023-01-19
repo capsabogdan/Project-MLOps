@@ -31,7 +31,7 @@ jobs:
         echo $GOOGLE_APPLICATION_CREDENTIALS
 
     - name: Use the credentials
-      run: gcloud auth activate-service-account --key-file=credentials.json
+      run: gcloud auth activate-service-account --key-file=tests/credentials.json
 
     - name: Install dependencies
       run: |
