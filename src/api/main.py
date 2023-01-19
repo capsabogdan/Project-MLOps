@@ -79,7 +79,7 @@ def getuserPrediction(importedModel, userId, total_movies, movieMetadata, data):
         top_ten_rec_titles.append(mapMovieIdToTitle(movieMetadata, movieId))
 
     # print(top_ten_rec_titles)
-    return top_ten_recs
+    return top_ten_recs, top_ten_rec_titles
 
 @app.get("/predict/{user_id}")
 def get_movies_prediction(user_id: int):
@@ -89,7 +89,7 @@ def get_movies_prediction(user_id: int):
 
    total_movies = 9025
 
-   top_ten_recs = getuserPrediction(importedModel, user_id, total_movies, movieMetadata, testData)
+   top_ten_recs , top_ten_rec_titles= getuserPrediction(importedModel, user_id, total_movies, movieMetadata, testData)
    print(top_ten_recs)
 
-   return {"top_ten_recs": top_ten_recs}
+   return {"top_ten_recs": top_ten_rec_titles}
