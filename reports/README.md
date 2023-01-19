@@ -326,8 +326,8 @@ end of the project.
 The TRAINING container is set up to run the hydra configuration in the Dockerfile ENTRYPOINT. ????
 The INFERENCE container is encapsulating the Fast API. To run the container we are running *docker run -p 80:80 <image>*. This allowed us to easily test the model predictions, by sending HTTP requests.
  
- **Dockerfile.train**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.train 
-**Dockerfile.inference**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.inference 
+*Dockerfile.train**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.train 
+*Dockerfile.inference**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.inference 
  ---
 
 ### Question 16
@@ -344,8 +344,7 @@ The INFERENCE container is encapsulating the Fast API. To run the container we a
 > Answer:
 
 --- For debugging, we mainly used printing, as this was a quick way for finding hidden behaviour in the code. We have also used *vscode* debug breakpoints, especially as we had issues with the model returning an empty list of movies.
-Finally, we have used experiment logging, creating a W&B report, to better understand the model’s training. - 
----
+Finally, we have used experiment logging, creating a W&B report, to better understand the model’s training. ---
 
 ## Working in the cloud
 
@@ -427,10 +426,9 @@ Finally, some of us have used VM instances for developing purposes, connecting t
 > *`curl -X POST -F "file=@file.json"<weburl>`*
 >
 > Answer: 
-—
-For the model deployment, we have created a Docker file, creating an image that, containerizes the training, when built. We have pushed this image to the container registry and set up a pipeline, where pull requests from *test* branch to *main* would trigger the entire built, through VertexAI.
-To invoke the service , the user needs to call curl -X GET "https://gcp-movie-app-v3-qp7ixpl7fq-ew.a.run.app/predict/100"
----
+
+--- For the model deployment, we have created a Docker file, creating an image that, containerizes the training, when built. We have pushed this image to the container registry and set up a pipeline, where pull requests from *test* branch to *main* would trigger the entire built, through VertexAI.
+To invoke the service , the user needs to call curl -X GET "https://gcp-movie-app-v3-qp7ixpl7fq-ew.a.run.app/predict/100" ---
 
 
 ### Question 23
@@ -447,8 +445,7 @@ To invoke the service , the user needs to call curl -X GET "https://gcp-movie-ap
 > Answer:
 
 --- We did not implement monitoring, but our idea would be to implement Data Drifting monitoring, creating reports with *evidently*, which may help in debugging, exploring and reporting the model’s results
-Additionally, we would like to monitor our system, through the use of telemetry. Thus, in our implementation, we would integrate *opentelemetry* with our *fastapi* to extract relevant data and then visualize them through *Signoz*.
- ---
+Additionally, we would like to monitor our system, through the use of telemetry. Thus, in our implementation, we would integrate *opentelemetry* with our *fastapi* to extract relevant data and then visualize them through *Signoz*. ---
 
 ### Question 24
 
@@ -483,11 +480,8 @@ Additionally, we would like to monitor our system, through the use of telemetry.
 >
 > Answer:
 
---- ![my_image](figures/Team17_architecture.PNG)
-The project structure is based on the cookieCutter template. We are making use of DVC to pull the raw data from the Cloud Buckets, then process the data through the make file and push it to a separate Bucket. Besides, we have set up Github Actions for Continuous Integration and deployed both training and inference as Docker containers in the Cloud Registry. The training container gets built for every pull request from *test* branch to *main*, through the *VertexAI* service, which will run the training, and output the model’s performance.    
-Finally, the inference is executed through the fastAPI, which exposes the Docker Inference image in a WebService in the CloudRun Service  - https://gcp-movie-app-v3-qp7ixpl7fq-ew.a.run.app
-
- ---
+--- ![my_image](figures/Team17_architecture.PNG) The project structure is based on the cookieCutter template. We are making use of DVC to pull the raw data from the Cloud Buckets, then process the data through the make file and push it to a separate Bucket. Besides, we have set up Github Actions for Continuous Integration and deployed both training and inference as Docker containers in the Cloud Registry. The training container gets built for every pull request from *test* branch to *main*, through the *VertexAI* service, which will run the training, and output the model’s performance.    
+Finally, the inference is executed through the fastAPI, which exposes the Docker Inference image in a WebService in the CloudRun Service  - https://gcp-movie-app-v3-qp7ixpl7fq-ew.a.run.app ---
 
 ### Question 26
 
@@ -519,10 +513,13 @@ Finally, the inference is executed through the fastAPI, which exposes the Docker
 > Answer:
 
 --- Alexandra Polymenopoulou s212558 was in charge of: Training Deployment, modelling, W&B, Hydra
+      
 Bogdan Capsa s210172 was in charge of: FASTApi Deployment, GithubActions, DVC
+      
 Jakob Fahl s184419 was in charge of W&B, MakeData, DVC, modelling
+      
 Melina Siskou s213158 was in charge of: FASTApi Deployment, MakeData, unit tests 
-Thomas Spyrou s213161 was in charge of Docker Training Deployment, GithubActions, unit tests
- ---
+      
+Thomas Spyrou s213161 was in charge of Docker Training Deployment, GithubActions, unit tests. ---
 
 
