@@ -32,9 +32,12 @@ jobs:
 
     - name: Use the credentials
       run: gcloud auth activate-service-account --key-file=credentials.json
+
+    - name: Create dir
+      run: mkdir tests/temp/
     
     - name: Get Data from Bucket
-      run: gcloud storage cp gs://movies-mlops-clean/
+      run: gcloud storage cp gs://movies-mlops-clean/ tests/temp_data/
 
     - name: Install dependencies
       run: |
