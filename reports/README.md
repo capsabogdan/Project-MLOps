@@ -238,7 +238,7 @@ end of the project.
 >
 > Answer:
 
---- We used DVC for pulling the raw data to our local machines from a Cloud Bucket, and then used it for pushing the processed data to a separate Bucket. Even though our dataset wasn’t particularly large it was convenient for us to have version control, since we were able to store it in a remote location, and simply use “dvc pull” to get the data to our local machine. Another benefit is that if we were to change our dataset (i.e.add more data to it), we could still store the previous version of the dataset in case we wanted to replicate an earlier experiment.---
+--- We used DVC for pulling the raw data to our local machines from a Cloud Bucket, and then used it for pushing the processed data to a separate Bucket. Even though our dataset wasn’t particularly large it was convenient for us to have version control, since we were able to store it in a remote location, and simply use dvc pull to get the data to our local machine. Another benefit is that if we were to change our dataset (i.e.add more data to it), we could still store the previous version of the dataset in case we wanted to replicate an earlier experiment.---
 
 ### Question 11
 
@@ -258,8 +258,7 @@ end of the project.
 
 We are mainly testing the data, asserting that all labels are represented and the size of each datapoint. Furthermore, we are running the CI on the latest Ubuntu version, python 3.8. So code changes can pass when pushing to dev, but for the merge to test should be evaluated and be aproved only if they do not affect the size of the datapoints and labels in use. The final step, which leads to production is to do a PR from test to main, as this will trigger further the CD in the Cloud. 
 
-Our last Github Action: https://github.com/capsabogdan/Project-MLOps/actions/runs/3961993677
- ---
+Our last Github Action: https://github.com/capsabogdan/Project-MLOps/actions/runs/3961993677 ---
 
 ## Running code and tracking experiments
 
