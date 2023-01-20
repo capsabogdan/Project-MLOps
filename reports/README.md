@@ -254,7 +254,12 @@ end of the project.
 >
 > Answer:
 
---- For the CI we have set up multiple branches and Github actions. The CI is done for testing and the actions get triggered when merging from **DEV** to **TEST**. ---
+--- For the CI we have set up multiple branches and Github actions. The CI is done for testing and the actions get triggered when merging from **DEV** to **TEST**.
+
+We are mainly testing the data, asserting that all labels are represented and the size of each datapoint. Furthermore, we are running the CI on the latest Ubuntu version, python 3.8. So code changes can pass when pushing to dev, but for the merge to test should be evaluated and be aproved only if they do not affect the size of the datapoints and labels in use. The final step, which leads to production is to do a PR from test to main, as this will trigger further the CD in the Cloud. 
+
+Our last Github Action: https://github.com/capsabogdan/Project-MLOps/actions/runs/3961993677
+ ---
 
 ## Running code and tracking experiments
 
@@ -323,7 +328,9 @@ end of the project.
 > Answer:
 
 --- For our project we developed 2 images: training, and inference. We have created a Docker File for training the model. 
-The TRAINING container is set up to run the hydra configuration in the Dockerfile ENTRYPOINT. ????
+The TRAINING container is set up to run the hydra configuration. Thus, it trains the model with hyperparameters in config on train data,
+    saves the model and evaluates it on test data. Its entrypoint is ENTRYPOINT ["python", "-u", "src/models/train_model.py", "hydra.job.chdir=False"] and the container gets triggered in VertexAI whenever we have a merge from Dev to Test.
+    
 The INFERENCE container is encapsulating the Fast API. To run the container we are running *docker run -p 80:80 <image>*. This allowed us to easily test the model predictions, by sending HTTP requests.
  
 **Dockerfile.train**: https://github.com/capsabogdan/Project-MLOps/blob/dev/Dockerfile.train
