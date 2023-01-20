@@ -328,7 +328,7 @@ Our last Github Action: https://github.com/capsabogdan/Project-MLOps/actions/run
 
 --- For our project we developed 2 images: training, and inference. We have created a Docker File for training the model. 
 The TRAINING container is set up to run the hydra configuration. Thus, it trains the model with hyperparameters in config on train data,
-    saves the model and evaluates it on test data. Its entrypoint is ENTRYPOINT ["python", "-u", "src/models/train_model.py", "hydra.job.chdir=False"] and the container gets triggered in VertexAI whenever we have a merge from Dev to Test.
+    saves the model and evaluates it on test data. Its entrypoint is ENTRYPOINT ["python", "-u", "src/models/train_model.py", "hydra.job.chdir=False"] the image is built on PR from TEST to MASTER, once the image is built the training container can be run with the VERTEX AI with a specific config file that we have set up and can be changed.
     
 The INFERENCE container is encapsulating the Fast API. To run the container we are running *docker run -p 80:80 <image>*. This allowed us to easily test the model predictions, by sending HTTP requests.
  
